@@ -204,16 +204,16 @@ export function CreateGymWizard({ onSuccess, onCancel, initialData }: CreateGymW
 
   const stepsList = isEditing
     ? [
-        { num: 1, label: 'Gym Info', icon: Building2 },
-        { num: 2, label: 'Plan & MRR', icon: CreditCard },
-        { num: 3, label: 'Settings', icon: Sliders },
-      ]
+      { num: 1, label: 'Gym Info', icon: Building2 },
+      { num: 2, label: 'Plan & MRR', icon: CreditCard },
+      { num: 3, label: 'Settings', icon: Sliders },
+    ]
     : [
-        { num: 1, label: 'Gym Info', icon: Building2 },
-        { num: 2, label: 'Plan & MRR', icon: CreditCard },
-        { num: 3, label: 'Settings', icon: Sliders },
-        { num: 4, label: 'Owner Credentials', icon: KeyRound },
-      ];
+      { num: 1, label: 'Gym Info', icon: Building2 },
+      { num: 2, label: 'Plan & MRR', icon: CreditCard },
+      { num: 3, label: 'Settings', icon: Sliders },
+      { num: 4, label: 'Owner Credentials', icon: KeyRound },
+    ];
 
   const isLoading = isCreating || isUpdating;
 
@@ -230,29 +230,26 @@ export function CreateGymWizard({ onSuccess, onCancel, initialData }: CreateGymW
               <div key={s.num} className="flex items-center">
                 <div className="flex flex-col items-center gap-1.5">
                   <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-200 ${
-                      isDone
-                        ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                        : isCurrent
+                    className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-200 ${isDone
+                      ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                      : isCurrent
                         ? 'bg-red-600 text-white shadow-lg shadow-red-600/30 border border-red-500'
                         : 'bg-zinc-900 text-zinc-500 border border-zinc-800'
-                    }`}
+                      }`}
                   >
                     {isDone ? <CheckCircle2 className="w-5 h-5" /> : <Icon className="w-4 h-4" />}
                   </div>
                   <span
-                    className={`text-xs font-semibold ${
-                      isCurrent ? 'text-zinc-100' : isDone ? 'text-zinc-400' : 'text-zinc-600'
-                    }`}
+                    className={`text-xs font-semibold ${isCurrent ? 'text-zinc-100' : isDone ? 'text-zinc-400' : 'text-zinc-600'
+                      }`}
                   >
                     {s.label}
                   </span>
                 </div>
                 {idx < stepsList.length - 1 && (
                   <div
-                    className={`w-16 h-0.5 mx-3 ${
-                      step > s.num ? 'bg-emerald-500/50' : 'bg-zinc-800'
-                    }`}
+                    className={`w-16 h-0.5 mx-3 ${step > s.num ? 'bg-emerald-500/50' : 'bg-zinc-800'
+                      }`}
                   />
                 )}
               </div>
@@ -594,7 +591,7 @@ export function CreateGymWizard({ onSuccess, onCancel, initialData }: CreateGymW
                   name="ownerName"
                   value={formData.ownerName}
                   onChange={handleChange}
-                  placeholder="e.g. Tariq Butt"
+                  placeholder="e.g. Imran"
                   required
                   className="w-full bg-zinc-900/80 border border-zinc-800 rounded-lg px-3.5 py-2.5 text-zinc-100 text-sm focus:outline-none focus:border-red-500"
                 />
