@@ -12,10 +12,17 @@ interface AdminAuthState {
   isAuthenticated: boolean;
 }
 
+const getInitialAdminToken = (): string | null => {
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem('ironman_admin_token');
+  }
+  return null;
+};
+
 const initialState: AdminAuthState = {
   user: null,
-  token: null,
-  isAuthenticated: false,
+  token: getInitialAdminToken(),
+  isAuthenticated: !!getInitialAdminToken(),
 };
 
 export const authSlice = createSlice({
@@ -29,6 +36,9 @@ export const authSlice = createSlice({
       state.user = action.payload.user;
       if (action.payload.token) {
         state.token = action.payload.token;
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('ironman_admin_token', action.payload.token);
+        }
       }
       state.isAuthenticated = true;
     },
@@ -36,6 +46,9 @@ export const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('ironman_admin_token');
+      }
     },
   },
 });

@@ -8,7 +8,10 @@ export const baseApi = createApi({
     baseUrl: API_BASE_URL,
     credentials: 'include', // Automatically passes httpOnly cookie
     prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as any)?.auth?.token;
+      let token = (getState() as any)?.adminAuth?.token;
+      if (!token && typeof window !== 'undefined') {
+        token = localStorage.getItem('ironman_admin_token');
+      }
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }

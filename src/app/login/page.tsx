@@ -2,7 +2,9 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
 import { useAdminLoginMutation } from '../../redux/baseApi';
+import { setAdminCredentials } from '../../redux/authSlice';
 import { ShieldAlert, Lock, Mail, Loader2, ArrowRight } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -11,6 +13,7 @@ export default function SuperAdminLoginPage() {
   const [password, setPassword] = useState('Admin@123456');
   const [login, { isLoading }] = useAdminLoginMutation();
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,6 +23,10 @@ export default function SuperAdminLoginPage() {
         toast.error('Access denied. SuperAdmin privileges required.');
         return;
       }
+      if (res.token) {
+        localStorage.setItem('ironman_admin_token', res.token);
+      }
+      dispatch(setAdminCredentials({ user: res.user, token: res.token }));
       toast.success('Welcome back, SuperAdmin!');
       router.push('/');
     } catch (err: any) {
