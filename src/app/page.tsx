@@ -18,7 +18,7 @@ import {
 import { formatCurrency, formatDate } from '../lib/utils';
 
 export default function SuperAdminDashboardPage() {
-  const { data: statsData, isLoading } = useGetPlatformStatsQuery({}, { pollingInterval: 15000 });
+  const { data: statsData, isLoading } = useGetPlatformStatsQuery({}, { pollingInterval: 10000 });
 
   const metrics = statsData?.metrics || {
     totalGyms: 0,

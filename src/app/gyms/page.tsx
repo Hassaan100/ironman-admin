@@ -26,7 +26,10 @@ export default function GymsManagementPage() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [editingGym, setEditingGym] = useState<any>(null);
 
-  const { data: gymsData, isLoading, refetch } = useGetAllGymsQuery({ search: searchQuery });
+  const { data: gymsData, isLoading, isFetching, refetch } = useGetAllGymsQuery(
+    { search: searchQuery },
+    { pollingInterval: 10000 }   // ← auto-refresh every 10 s
+  );
   const [deleteGym] = useDeleteGymMutation();
 
   const handleDeleteGym = async (id: string, name: string) => {
@@ -71,6 +74,14 @@ export default function GymsManagementPage() {
             <Building2 className="w-5 h-5 text-red-500" />
             <h3 className="text-base font-bold text-white">Registered Gym Accounts</h3>
             <span className="text-xs text-zinc-500 font-mono">({gymsData?.gyms?.length || 0} Total)</span>
+            <button
+              onClick={() => refetch()}
+              disabled={isFetching}
+              title="Refresh gym list"
+              className="ml-1 p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition disabled:opacity-50"
+            >
+              <svg className={`w-3.5 h-3.5 ${isFetching ? 'animate-spin' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+            </button>
           </div>
 
           <div className="relative w-full md:w-72">
