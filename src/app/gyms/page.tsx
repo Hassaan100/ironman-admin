@@ -97,7 +97,10 @@ export default function GymsManagementPage() {
         </div>
 
         {isLoading ? (
-          <div className="py-12 text-center text-zinc-500 text-xs">Loading gym directory...</div>
+          <div className="py-16 text-center text-zinc-400 text-xs flex flex-col items-center justify-center gap-3">
+            <div className="w-8 h-8 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
+            <p className="font-semibold text-zinc-400">Loading gym directory...</p>
+          </div>
         ) : gymsData?.gyms?.length === 0 ? (
           <div className="py-12 text-center">
             <Building2 className="w-12 h-12 text-zinc-700 mx-auto mb-3" />

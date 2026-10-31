@@ -122,7 +122,10 @@ export default function SuperAdminDashboardPage() {
         </div>
 
         {isLoading ? (
-          <div className="py-8 text-center text-zinc-500 text-xs">Loading accounts...</div>
+          <div className="py-12 text-center text-zinc-400 text-xs flex flex-col items-center justify-center gap-2.5">
+            <div className="w-6 h-6 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
+            <span>Loading accounts...</span>
+          </div>
         ) : statsData?.recentGyms?.length === 0 ? (
           <div className="py-8 text-center text-xs text-zinc-500">No gym accounts created yet.</div>
         ) : (

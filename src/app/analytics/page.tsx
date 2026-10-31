@@ -57,7 +57,10 @@ export default function AnalyticsPage() {
           <PieChart className="w-5 h-5 text-red-500" /> Subscription Plan Breakdown
         </h3>
         {isLoading ? (
-          <div className="py-8 text-center text-xs text-zinc-500">Loading plan metrics...</div>
+          <div className="py-12 text-center text-zinc-400 text-xs flex flex-col items-center justify-center gap-2.5">
+            <div className="w-6 h-6 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
+            <span>Loading plan metrics...</span>
+          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {statsData?.planBreakdown?.map((plan: any) => (
