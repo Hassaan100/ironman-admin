@@ -21,7 +21,12 @@ export default function RootLayout({
       >
         <ReduxProvider>
           {children}
-          <Toaster position="top-right" richColors theme="dark" />
+          <Toaster position="bottom-center" richColors theme="dark" closeButton toastOptions={{
+            classNames: {
+              // Close button ko right ya left corner par move karne ke liye
+              closeButton: '!left-auto !right-2 !top-2',
+            },
+          }} />
         </ReduxProvider>
       </body>
     </html>
